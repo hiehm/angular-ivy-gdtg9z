@@ -1,1 +1,42 @@
-<p>Start editing to see some magic happen :)</p>
+<mat-table [dataSource]="queryInvoiceDeliveryData">
+<ng-container matColumnDef="seller_name">
+    <mat-header-cell *matHeaderCellDef>
+        客戶英文名稱
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.seller_name}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="response_at">
+    <mat-header-cell *matHeaderCellDef>驗證日期 <mat-checkbox title="逾4個月尚無法驗證"></mat-checkbox></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <ng-container *ngFor="let item of row.logs">
+            <p [class.text-danger]="item.response_at==='逾4個月尚無法驗證'">{{item.response_at}}</p>
+        </ng-container>
+    </mat-cell>
+</ng-container>
+<ng-container matColumnDef="uniform_invoice_status">
+    <mat-header-cell *matHeaderCellDef>發票狀態 <mat-checkbox title="作廢"></mat-checkbox></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <ng-container *ngFor="let item of row.logs">
+          <p [class.text-danger]="item.match_tax_id==='作廢'">{{item.uniform_invoice_status}}</p>          
+        </ng-container>
+    </mat-cell>
+</ng-container>
+<ng-container matColumnDef="match_tax_id">
+    <mat-header-cell *matHeaderCellDef>統編與發票號碼 <mat-checkbox title="不符合"></mat-checkbox></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <ng-container *ngFor="let item of row.logs">
+            <p [class.text-danger]="item.match_tax_id==='不符合'">{{item.match_tax_id}}</p>
+        </ng-container>
+    </mat-cell>
+</ng-container>
+<ng-container matColumnDef="match_tax_include_amount">
+    <mat-header-cell *matHeaderCellDef>銷售額含稅額 <mat-checkbox  title="不符合" [(ngModel)]="tb_filterObj.match_tax_include_amount"></mat-checkbox></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <ng-container *ngFor="let item of row.logs">
+            <p [class.text-danger]="item.match_tax_include_amount==='不符合'">{{item.match_tax_include_amount}}</p>
+        </ng-container>
+    </mat-cell>
+</ng-container>
+<mat-header-row *matHeaderRowDef="['seller_name','response_at','uniform_invoice_status','match_tax_id','match_tax_include_amount']"></mat-header-row>
+<mat-row *matRowDef="let row; columns: ['seller_name','response_at','uniform_invoice_status','match_tax_id','match_tax_include_amount']"></mat-row>
+</mat-table>
