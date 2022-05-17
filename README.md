@@ -1,3 +1,13 @@
 # angular-ivy-7rcmvm
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-ivy-7rcmvm)
+情境:
+
+1. Table 標題欄有四個 checkbox 對應下方所屬欄位
+   做為點擊後的篩選條件
+
+2. "驗證日期"點擊則其餘不可點，同理"發票驗證、
+   統編與發票號碼、銷售額含稅額"任一點擊後
+   則"驗證日期"不可點
+
+Question:
+請依照情境寫出點擊 checkbox 後正確過濾後的資料顯示於 table 寫法不限，可自由新增變數...等
